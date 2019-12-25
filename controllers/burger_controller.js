@@ -2,13 +2,12 @@
 
 // Set up express for router
 var express = require("express");
-
 var router = express.Router();
 
 // Import model (burger.js) to use its database functions
 var burger = require("../models/burger.js");
 
-// Create all routes and set up logic within those routes where required
+// Create all routes and set up logic within routes where required
 router.get("/", (req, res) => {
     burger.all((data) => {
     var hbsObject = {
@@ -29,14 +28,13 @@ router.post("/api/burgers", (req, res) => {
 router.put("/api/burgers/:id", (req, res) => {
   var condition = "id = " + req.params.id;
   console.log("condition", condition);
-  burger.update(
-    {
+  burger.update({
       devoured: req.body.devoured
     },
     condition,
     (result) => {
       if (result.changedRows === 0) {
-        // If no rows were changed, then the ID must not exist, so 404
+        // If no rows were changed, then ID must not exist, so 404
         return res.status(404).end();
       }
       res.status(200).end();
