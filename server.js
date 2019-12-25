@@ -2,14 +2,14 @@
 // Burger App -- HW14 - Node/Express/Handlebars App
 // Copyright 2019 Dean McCluskey
 
-// Set up Express for application
+// Import Express for application
 var express = require("express");
 
-// Set up port of app, process.env.PORT lets port be set by Heroku
+// Set up port for app, process.env.PORT lets port be set by Heroku
 var PORT = process.env.PORT || 3000;
 var app = express();
 
-// Serve static content for app from "public" directory in the app directory
+// Serve static content for app from "public" directory in app directory
 app.use(express.static("public"));
 
 // Parse request body as JSON
@@ -21,12 +21,12 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-// Import routes and give server access to them
+// Import routes, give server access to them
 var routes = require("./controllers/burger_controller.js");
 app.use(routes);
 
 // Start server to listen to client requests
 app.listen(PORT, () => {
-    // Log (server-side) when our server has started
+    // Log server has started
     console.log("Server listening on: http://localhost:" + PORT);
   });
